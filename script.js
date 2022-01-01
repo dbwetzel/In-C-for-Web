@@ -2,6 +2,12 @@ document.querySelector('button') ?.addEventListener('click', async () => {
   await Tone.start()
   console.log('audio is ready')
 })
+
+phrase = [
+  [[0, "C4"], ["0:1:2", "e4"], ["0:2", "g4"], ["0:3", "e4"], ["1:0:0", "C4"]],
+  [[0, "C4"],["0:0:2", "e4"]],
+  []
+]
 var bpm = 138; // set the global tempo
 
 //create a synth and connect it to the main output (your speakers)
@@ -73,21 +79,40 @@ document.querySelector("button[name='stop']") ?.addEventListener('click', () => 
   console.log('stopping transport')
 })
 
-
 document.querySelector("button[name='seq2']") ?.addEventListener('click', () => {
-  let t = Tone.Transport.nextSubdivision("16n");
+
+  let t = Tone.Transport.position;
+
+  let times = t.split(':');
+  times[2] = 0; // set to downbeat;
+  times[1] = Number(times[1]) + 1; // move up to the next downbeat;
+  if (times[1] > 3) {
+    times[1] = 0;
+    times[0] = Number(times[0]) + 1;
+  }
+
+  console.log("position: " + Tone.Transport.position);
+  console.log("position (array): " + times);
+  console.log("now: " + Tone.Transport.now());
+  t = times[0] + ":" + times[1] + ":" + times[2];
   console.log("next sub: " + t);
+  sequence2(t);
 
-  let seq = new Tone.Sequence((time, note) => {
+});
+
+function sequence2(t) {
+  const part = new Tone.Part(((time, note) => {
+    // the notes given as the second element in the array
+    // will be passed in as the second argument
+    console.log("note: " + Tone.Transport.position);
     synth2.triggerAttackRelease(note, "8n", time);
-    // subdivisions are given as subarrays
-  }, ["c4", "c4", "c4", "c4", "c4", ["e4", "c4"], "c4", "c4"]).start();//["e4", "f4", "g4", "c4", "d4", ["e4", "f4"], "g4", "f4"]).start();
-  seq.loop = 1;
+  }),
+    [[0, "C4"], ["0:0:0.3", "e4"], ["0:0:2", "f4"], ["0:1:0", "e4"]]).start(t);
 
-})
+  //part.loop = 1;
+}
 
-
-document.querySelector("button[name='sched1']") ?.addEventListener('click', () => {
+document.querySelector("button[name='seq1']") ?.addEventListener('click', () => {
 
   let t = Tone.Transport.position;
 
@@ -115,7 +140,7 @@ function sequence1(t) {
     console.log("note: " + Tone.Transport.position);
     synth1.triggerAttackRelease(note, "8n", time);
   }),
-    [[0, "C4"], ["0:1:2", "e4"], ["0:2", "g4"], ["0:3", "e4"], ["1:0:0", "C4"]]).start(t);
+    [[0, "C4"], ["0:0:0.3", "e4"], ["0:1:0", "c4"], ["0:1:0.3", "e4"], ["0:2:0", "C4"], ["0:2:0.3", "e4"]]).start(t);
 
   //part.loop = 1;
 }
