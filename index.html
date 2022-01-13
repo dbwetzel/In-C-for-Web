@@ -7,8 +7,10 @@
 	<title>replit</title>
 	<link href="style.css" rel="stylesheet" type="text/css" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js">
+
 	</script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.32/Tone.js">
+
 	</script>
 </head>
 
@@ -18,7 +20,13 @@
     <button name="metro">Start metro</button>
     <button name="stop">Stop metro</button>
     <button name="mute_metro">Mute Metro</button>
-    <button name="unmute_metro">Unmute Metro</button>
+    <button name="unmute_metro">Unmute Metro</button><br>
+    
+    <input type="checkbox" id="sync" name="sync">
+    <label for="sync">Sync</label><br>
+    <label for="tempo">Tempo:</label>
+    <input type="text" id="tempo" name="tempo" required
+       minlength="1" maxlength="8" size="10">
     </div>
     <div name = "phrases">
       <p> press to play ... </p>

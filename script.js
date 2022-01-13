@@ -55,7 +55,12 @@ const loopD = new Tone.Loop(time => {
 }, "8n").start(0);
 // the loops start when the Transport is started
 //Tone.Transport.start()
-
+let syncStatus = document.querySelector("input[name='sync']"); syncStatus.addEventListener('change', () => {
+  if(syncStatus.checked){
+    Tone.Transport.bpm.value = bpm * 1.05;
+  } else Tone.Transport.bpm.value = bpm;
+  console.log(Tone.Transport.bpm.value)
+})
 document.querySelector("button[name='mute_metro']") ?.addEventListener('click', () => {
   synthA.volume.value = -96;
   synthB.volume.value = -96;
