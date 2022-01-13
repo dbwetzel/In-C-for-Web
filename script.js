@@ -1,8 +1,8 @@
-document.querySelector('button') ?.addEventListener('click', async () => {
+/** document.querySelector('button') ?.addEventListener('click', async () => {
   await Tone.start()
   console.log('audio is ready')
 })
-
+*/
 var phrase = [
   [{ time: 0, pitch: "C4", dur: "32n" }, { time: "0:0:0.3", pitch: "e4", dur: "4n" }, { time: "0:1:0", pitch: "c4", dur: "32n" }, { time: "0:1:0.3", pitch: "e4", dur: "4n" }, { time: "0:2:0", pitch: "C4", dur: "32n" }, { time: "0:2:0.3", pitch: "e4", dur: "4n" }], /** #1 */
   [{ time: 0, pitch: "C4", dur: "32n" }, { time: "0:0:0.3", pitch: "e4", dur: "8n" }, { time: "0:0:2", pitch: "f4", dur: "8n" }, { time: "0:1:0", pitch: "e4", dur: "4n" }], /** #2 */
@@ -20,7 +20,10 @@ var phrase = [
 // durations of each sequence for looping purposes
 var durations = ["2n.", "2n", "2n", "2n", "2n", "2m", "2m", "4m", "1m", "8n", "4n.", "1n."];
 
-var parts = new Array(53);
+var parts = new Array(53); // keep a copy of each part generated
+
+var octaves = new Array(53).fill(0);
+
 
 var bpm = 138; // set the global tempo
 
@@ -99,6 +102,19 @@ document.querySelector("button[name='seq1']") ?.addEventListener('mouseleave', (
   if (parts[0])
     parts[0].loop = 1;
 });
+document.querySelector("button[name='up1']") ?.addEventListener('click', () => {
+  if(octaves[0] < 3)
+    octaves[0] ++;
+  let e = document.getElementById('oct1');
+  e.innerHTML = "shift: " + octaves[0] + " 8v";
+});
+document.querySelector("button[name='down1']") ?.addEventListener('click', () => {
+  if(octaves[0] > -3)
+    octaves[0] --;
+  let e = document.getElementById('oct1');
+  e.innerHTML = "shift: " + octaves[0] + " 8v";
+});
+
 
 document.querySelector("button[name='seq2']") ?.addEventListener('mousedown', () => {
   parts[1] = sequence(1);
@@ -204,7 +220,8 @@ function sequence(i) {
   const part = new Tone.Part(((time, note) => {
     // the notes given as the second element in the array
     // will be passed in as the second argument
-    synth[i % synth.length].triggerAttackRelease(note.pitch, note.dur, time);
+    // Tone.Frequency("A4").transpose(3);
+    synth[i % synth.length].triggerAttackRelease(Tone.Frequency(note.pitch).transpose(octaves[i] * 12), note.dur, time);
   }), phrase[i]).start(t);
   part.loopEnd = durations[i];
 
