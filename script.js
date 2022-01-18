@@ -20,6 +20,8 @@ var phrase = [
 // durations of each sequence for looping purposes
 var durations = ["2n.", "2n", "2n", "2n", "2n", "2m", "2m", "4m", "1m", "8n", "4n.", "1n."];
 
+var octaves = new Array(53).fill(0); // keep track of transpositions
+
 var parts = new Array(53);
 
 var bpm = 138; // set the global tempo
@@ -98,6 +100,13 @@ document.querySelector("button[name='seq1']") ?.addEventListener('mouseup', () =
 document.querySelector("button[name='seq1']") ?.addEventListener('mouseleave', () => {
   if (parts[0])
     parts[0].loop = 1;
+});
+document.querySelector("button[name='up8_1']") ?.addEventListener ('click', () => {
+  if(octaves[0] < 3) octaves[0]++;
+});
+
+document.querySelector("button[name='dn8_1']") ?.addEventListener ('click', () => {
+  if(octaves[0] > -3) octaves[0]--;
 });
 
 document.querySelector("button[name='seq2']") ?.addEventListener('mousedown', () => {
@@ -204,7 +213,8 @@ function sequence(i) {
   const part = new Tone.Part(((time, note) => {
     // the notes given as the second element in the array
     // will be passed in as the second argument
-    synth[i % synth.length].triggerAttackRelease(note.pitch, note.dur, time);
+    //synth[i % synth.length].triggerAttackRelease(note.pitch, note.dur, time);
+    synth[i % synth.length].triggerAttackRelease(Tone.Frequency(note.pitch).transpose(octaves[i] * 12), note.dur, time);
   }), phrase[i]).start(t);
   part.loopEnd = durations[i];
 
