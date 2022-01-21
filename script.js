@@ -58,7 +58,7 @@ const loopD = new Tone.Loop(time => {
 // the loops start when the Transport is started
 //Tone.Transport.start()
 let syncStatus = document.querySelector("input[name='sync']"); syncStatus.addEventListener('change', () => {
-  if(syncStatus.checked){
+  if (syncStatus.checked) {
     Tone.Transport.bpm.value = bpm * 1.05;
   } else Tone.Transport.bpm.value = bpm;
   console.log(Tone.Transport.bpm.value)
@@ -90,115 +90,35 @@ document.querySelector("button[name='stop']") ?.addEventListener('click', () => 
   console.log('stopping transport')
 })
 
-document.querySelector("button[name='seq1']") ?.addEventListener('mousedown', () => {
-  parts[0] = sequence(0);
-  parts[0].loop = true;
-});
-document.querySelector("button[name='seq1']") ?.addEventListener('mouseup', () => {
-  parts[0].loop = 1;
-});
-document.querySelector("button[name='seq1']") ?.addEventListener('mouseleave', () => {
-  if (parts[0])
-    parts[0].loop = 1;
-});
-document.querySelector("button[name='up8_1']") ?.addEventListener ('click', () => {
-  if(octaves[0] < 3) octaves[0]++;
-});
+for (let i = 0; i < 12; i++) {
+  document.getElementById("sco" + (i + 1)) ?.addEventListener('mousedown', () => {
+    if (Tone.Transport.state = "started") {
+      parts[i] = sequence(i);
+      if(parts[i]) parts[i].loop = true;
+    } else console.log("start metronome first");
+  });
+  document.getElementById("sco" + (i + 1)) ?.addEventListener('mouseup', () => {
+    if (parts[i]) parts[i].loop = 1;
+  });
+  document.getElementById("sco" + (i + 1)) ?.addEventListener('mouseleave', () => {
+    if (parts[i]) parts[i].loop = 1;
+  });
 
-document.querySelector("button[name='dn8_1']") ?.addEventListener ('click', () => {
-  if(octaves[0] > -3) octaves[0]--;
-});
+  document.getElementById("up8_" + (i + 1)) ?.addEventListener('click', () => {
+    if (octaves[i] < 3) octaves[i]++;
+  });
 
-document.querySelector("button[name='seq2']") ?.addEventListener('mousedown', () => {
-  parts[1] = sequence(1);
-  parts[1].loop = true;
-});
-document.querySelector("button[name='seq2']") ?.addEventListener('mouseup', () => {
-  parts[1].loop = false;
-});
-
-document.querySelector("button[name='seq3']") ?.addEventListener('mousedown', () => {
-  parts[2] = sequence(2); // play sequence 3
-  parts[2].loop = true;
-});
-document.querySelector("button[name='seq3']") ?.addEventListener('mouseup', () => {
-  parts[2].loop = false;
-});
-
-document.querySelector("button[name='seq4']") ?.addEventListener('mousedown', () => {
-  parts[3] = sequence(3);
-  parts[3].loop = true;
-});
-document.querySelector("button[name='seq4']") ?.addEventListener('mouseup', () => {
-  parts[3].loop = false;
-});
-
-document.querySelector("button[name='seq5']") ?.addEventListener('mousedown', () => {
-  parts[4] = sequence(4);
-  parts[4].loop = true;
-});
-document.querySelector("button[name='seq5']") ?.addEventListener('mouseup', () => {
-  parts[4].loop = false;
-});
-
-document.querySelector("button[name='seq6']") ?.addEventListener('mousedown', () => {
-  parts[5] = sequence(5);
-  parts[5].loop = true;
-});
-document.querySelector("button[name='seq6']") ?.addEventListener('mouseup', () => {
-  parts[5].loop = false;
-});
-
-document.querySelector("button[name='seq7']") ?.addEventListener('mousedown', () => {
-  parts[6] = sequence(6);
-  parts[6].loop = true;
-});
-document.querySelector("button[name='seq7']") ?.addEventListener('mouseup', () => {
-  parts[6].loop = false;
-});
-
-document.querySelector("button[name='seq8']") ?.addEventListener('mousedown', () => {
-  parts[7] = sequence(7);
-  parts[7].loop = true;
-});
-document.querySelector("button[name='seq8']") ?.addEventListener('mouseup', () => {
-  parts[7].loop = false;
-});
-
-document.querySelector("button[name='seq9']") ?.addEventListener('mousedown', () => {
-  parts[8] = sequence(8);
-  parts[8].loop = true;
-});
-document.querySelector("button[name='seq9']") ?.addEventListener('mouseup', () => {
-  parts[8].loop = false;
-});
-
-document.querySelector("button[name='seq10']") ?.addEventListener('mousedown', () => {
-  parts[9] = sequence(9);
-  parts[9].loop = true;
-});
-document.querySelector("button[name='seq10']") ?.addEventListener('mouseup', () => {
-  parts[9].loop = false;
-});
-
-document.querySelector("button[name='seq11']") ?.addEventListener('mousedown', () => {
-  parts[10] = sequence(10);
-  parts[10].loop = true;
-});
-document.querySelector("button[name='seq11']") ?.addEventListener('mouseup', () => {
-  parts[10].loop = false;
-});
-
-document.querySelector("button[name='seq12']") ?.addEventListener('mousedown', () => {
-  parts[11] = sequence(11);
-  parts[11].loop = true;
-});
-document.querySelector("button[name='seq12']") ?.addEventListener('mouseup', () => {
-  parts[11].loop = false;
-});
+  document.getElementById("dn8_" + (i + 1)) ?.addEventListener('click', () => {
+    if (octaves[i] > -3) octaves[i]--;
+  });
+}
 
 function sequence(i) {
 
+  if(Tone.Transport.state == "stopped") {
+    console.log("start transport first");
+    return;
+  }
   let t = Tone.Transport.position;
 
   let times = t.split(':');
