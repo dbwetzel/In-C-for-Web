@@ -3,25 +3,6 @@ document.querySelector('button') ?.addEventListener('click', async () => {
   console.log('audio is ready')
 })
 
-var phrase = [
-  [{ time: 0, pitch: "C4", dur: "32n" }, { time: "0:0:0.3", pitch: "e4", dur: "4n" }, { time: "0:1:0", pitch: "c4", dur: "32n" }, { time: "0:1:0.3", pitch: "e4", dur: "4n" }, { time: "0:2:0", pitch: "C4", dur: "32n" }, { time: "0:2:0.3", pitch: "e4", dur: "4n" }], /** #1 */
-  [{ time: 0, pitch: "C4", dur: "32n" }, { time: "0:0:0.3", pitch: "e4", dur: "8n" }, { time: "0:0:2", pitch: "f4", dur: "8n" }, { time: "0:1:0", pitch: "e4", dur: "4n" }], /** #2 */
-  [{ time: "0:0:2", pitch: "e4", dur: "8n" }, { time: "0:1:0", pitch: "f4", dur: "8n" }, { time: "0:1:2", pitch: "e4", dur: "8n" }],/** #3 */
-  [{ time: "0:0:2", pitch: "e4", dur: "8n" }, { time: "0:1:0", pitch: "f4", dur: "8n" }, { time: "0:1:2", pitch: "g4", dur: "8n" }], /** #4 */
-  [{ time: 0, pitch: "e4", dur: "8n" }, { time: "0:0:2", pitch: "f4", dur: "8n" }, { time: "0:1:0", pitch: "g4", dur: "8n" }], /** #5 */
-  [{ time: 0, pitch: "c5", dur: "2m" }], /** #6 */
-  [{ time: "0:3:2", pitch: "c4", dur: "16n" }, { time: "0:3:3", pitch: "c4", dur: "16n" }, { time: "1:0:0", pitch: "c4", dur: "8n" }], /** #7 */
-  [{ time: 0, pitch: "g4", dur: "1n." }, { time: "1:2:0", pitch: "f4", dur: "2m" }], /** #8 */
-  [{ time: 0, pitch: "b4", dur: "16n" }, { time: "0:0:1", pitch: "g4", dur: "16n" }], /** #9 */
-  [{ time: 0, pitch: "b4", dur: "16n" }, { time: "0:0:1", pitch: "g4", dur: "16n" }], /** #10 */
-  [{ time: 0, pitch: "f4", dur: "16n" }, { time: "0:0:1", pitch: "g4", dur: "16n" }, { time: "0:0:2", pitch: "b4", dur: "16n" }, { time: "0:0:3", pitch: "g4", dur: "16n" }, { time: "0:1:0", pitch: "b4", dur: "16n" }, { time: "0:1:1", pitch: "g4", dur: "16n" }], /** #11 */
-  [{ time: "0:0:0", pitch: "f4", dur: "8n" }, { time: "0:0:2", pitch: "g4", dur: "8n" }, { time: "0:1:0", pitch: "b4", dur: "1n" }, { time: "1:1:0", pitch: "c5", dur: "4n" }] /** #12 */
-];
-// durations of each sequence for looping purposes
-var durations = ["2n.", "2n", "2n", "2n", "2n", "2m", "2m", "4m", "1m", "8n", "4n.", "1n."];
-
-var octaves = new Array(53).fill(0); // keep track of transpositions
-
 var parts = new Array(53);
 
 var bpm = 138; // set the global tempo
@@ -105,11 +86,11 @@ for (let i = 0; i < 12; i++) {
   });
 
   document.getElementById("up8_" + (i + 1)) ?.addEventListener('click', () => {
-    if (octaves[i] < 3) octaves[i]++;
+    if (InC_phrases[i].octave < 3) InC_phrases[i].octave++;
   });
 
   document.getElementById("dn8_" + (i + 1)) ?.addEventListener('click', () => {
-    if (octaves[i] > -3) octaves[i]--;
+    if (InC_phrases[i].octave > -3) InC_phrases[i].octave--;
   });
 }
 
@@ -134,9 +115,9 @@ function sequence(i) {
     // the notes given as the second element in the array
     // will be passed in as the second argument
     //synth[i % synth.length].triggerAttackRelease(note.pitch, note.dur, time);
-    synth[i % synth.length].triggerAttackRelease(Tone.Frequency(note.pitch).transpose(octaves[i] * 12), note.dur, time);
-  }), phrase[i]).start(t);
-  part.loopEnd = durations[i];
+    synth[i % synth.length].triggerAttackRelease(Tone.Frequency(note.pitch).transpose(InC_phrases[i].octave * 12), note.dur, time);
+  }), InC_phrases[i].sequence).start(t);
+  part.loopEnd = InC_phrases[i].duration;
 
   return part;
 
