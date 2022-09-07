@@ -2,10 +2,26 @@ document.querySelector('button') ?.addEventListener('click', async () => {
   await Tone.start()
   console.log('audio is ready')
 })
+ 
+document.getElementById("about") ?.addEventListener('click', () => {
+  let x = document.getElementById('aboutInC');
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }  });
+document.getElementById("metronome") ?.addEventListener('click', () => {
+  let x = document.getElementById('metro');
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }  });
 
 var parts = new Array(53);
 
 var bpm = 138; // set the global tempo
+document.getElementById("tempo-box").value = bpm;
 
 //create a synth and connect it to the main output (your speakers)
 const synth = new Array(16);
@@ -41,7 +57,11 @@ const loopD = new Tone.Loop(time => {
 let syncStatus = document.querySelector("input[name='sync']"); syncStatus.addEventListener('change', () => {
   if (syncStatus.checked) {
     Tone.Transport.bpm.value = bpm * 1.05;
-  } else Tone.Transport.bpm.value = bpm;
+    document.getElementById("tempo-box").value = Tone.Transport.bpm.value;
+  } else {
+    Tone.Transport.bpm.value = bpm;
+    document.getElementById("tempo-box").value = Tone.Transport.bpm.value;
+  }
   console.log(Tone.Transport.bpm.value)
 })
 document.querySelector("button[name='mute_metro']") ?.addEventListener('click', () => {
@@ -71,7 +91,8 @@ document.querySelector("button[name='stop']") ?.addEventListener('click', () => 
   console.log('stopping transport')
 })
 
-for (let i = 0; i < 12; i++) {
+// Attach actions to buttons
+for (let i = 0; i < 53; i++) {
   document.getElementById("sco" + (i + 1)) ?.addEventListener('mousedown', () => {
     if (Tone.Transport.state = "started") {
       parts[i] = sequence(i);

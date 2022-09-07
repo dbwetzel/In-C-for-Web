@@ -2,101 +2,136 @@
 <html>
 
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width">
-	<title>replit</title>
-	<link href="style.css" rel="stylesheet" type="text/css" />
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>replit</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js">
 
-	</script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.32/Tone.js">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.32/Tone.js">
 
-	</script>
+  </script>
 </head>
 
 <body>
-	<div>
-		<button name="tone">Start Audio</button>
-    <button name="metro">Start metro</button>
-    <button name="stop">Stop metro</button>
-    <button name="mute_metro">Mute Metro</button>
-    <button name="unmute_metro">Unmute Metro</button><br>
-    
-    <input type="checkbox" id="sync" name="sync">
-    <label for="sync">Sync</label><br>
-    <label for="tempo">Tempo:</label>
-    <input type="text" id="tempo" name="tempo" required
-       minlength="1" maxlength="8" size="10">
-    </div>
-    <div id = "phrases">
-      <p> press to play ... </p>
-    <table>
-    <tr><td>
-    <button id="up8_1" class="octButton">8 va</button><br>
-    <button id="dn8_1" class="octButton">8 vb</button><br>
-    <td><img src = "images/Sco1.png" id = "sco1" draggable="false"></td>
-    </tr><tr><td>
-    
-    <button id="up8_2" class="octButton">8 va</button><br>
-    <button id="dn8_2" class="octButton">8 vb</button><br>
-    <td><img src = "images/Sco2.png" id = "sco2" draggable="false">    
-    </tr><tr>
-    <td>
-    <button id="up8_3" class="octButton">8 va</button><br>
-    <button id="dn8_3" class="octButton">8 vb</button><br>
-    <td><img src = "images/Sco3.png" id = "sco3" draggable="false">    
-    </tr><tr><td>
-    <button id="up8_4" class="octButton">8 va</button><br>
-    <button id="dn8_4" class="octButton">8 vb</button><br>
-    <td><img src = "images/Sco4.png" id = "sco4" draggable="false">    
-    </tr><tr>
-    <td>
-    <button id="up8_5" class="octButton">8 va</button><br>
-    <button id="dn8_5" class="octButton">8 vb</button><br>
-    <td><img src = "images/Sco5.png" id = "sco5" draggable="false">    
-    </tr><tr>
-    <td>
-    <button id="up8_6" class="octButton">8 va</button><br>
-    <button id="dn8_6" class="octButton">8 vb</button><br>
-    <td><img src = "images/Sco6.png" id = "sco6" draggable="false">    
-    </tr><tr>
-    <td>
-    <button id="up8_7" class="octButton">8 va</button><br>
-    <button id="dn8_7" class="octButton">8 vb</button><br>
-    <td><img src = "images/Sco7.png" id = "sco7" draggable="false">    
-    </tr><tr>
-    <td>
-    <button id="up8_8" class="octButton">8 va</button><br>
-    <button id="dn8_8" class="octButton">8 vb</button><br>
-    <td><img src = "images/Sco8.png" id = "sco8" draggable="false">    
-    </tr><tr>
-    <td>
-    <button id="up8_9" class="octButton">8 va</button><br>
-    <button id="dn8_9" class="octButton">8 vb</button><br>
-    <td><img src = "images/Sco9.png" id = "sco9" draggable="false">    
-    </tr><tr>
-    <td>
-    <button id="up8_10" class="octButton">8 va</button><br>
-    <button id="dn8_10" class="octButton">8 vb</button><br>
-    <td><img src = "images/Sco10.png" id = "sco10" draggable="false">    
-    </tr><tr>
-    <td>
-    <button id="up8_11" class="octButton">8 va</button><br>
-    <button id="dn8_11" class="octButton">8 vb</button><br>
-    <td><img src = "images/Sco11.png" id = "sco11" draggable="false">    
-    </tr><tr>
-    <td>
-    <button id="up8_12" class="octButton">8 va</button><br>
-    <button id="dn8_12" class="octButton">8 vb</button><br>
-    <td><img src = "images/Sco12.png" id = "sco12" draggable="false">   
-    </tr></table> 
-    </div>
+  <button id="about" class='menu'>About "In C"</button>
+  <div id="aboutInC" style="display: none;">
+    <h2>About "In C"</h2>
+    <image src="frame.png" width=25% align="left" style="margin: 20px;" alt="https://InC-with-Tonejs.dbwetzel.repl.co">
+    </image>
+    <p>"In C" (1964), by Terry Riley, is meant for any number of musicians and for any instrumentation. It is a series
+      of 53 short musical phrases to be played by the entire ensemble in order, but asynchronously. An ostinato pulse is
+      usually given by one instrument to keep time (typically a piano, playing the note 'C' in multiple octaves).
+    </p>
+    <p>
+      At the start, players begin with phrase number 1, repeating, looping, or laying out and listening, <i>ad lib.</i>
+      Players move on to the next phrase (in order) when they feel that the moment is right. Players should stay within
+      3 or 4 phrases of the rest of the group. This process continues until the ensemble has played through all 53
+      phrases.
+    </p>
+    <p>A complete performance of 'In C' takes anywhere from 45 minutes to an hour and a half.</p>
+  </div>
+  <button id="metronome" class='menu'>Metronome</button>
+  <div id="metro" style="display: none; background-color: #EEEEEE;">
+    <button name="tone" class='metro-button'>Start Audio</button>
+    <button name="metro" class='metro-button'>Start metro</button>
+    <button name="stop" class='metro-button'>Stop metro</button><br></br>
+    <button name="mute_metro" class='metro-button'>Mute Metro</button>
+    <button name="unmute_metro" class='metro-button'>Unmute Metro</button><br>
+    <p></p>
+    <label class="form-control">
+      <input type="checkbox" id="sync" name="sync" name="checkbox" />
+      Sync
+    </label>
+    <label> Tempo:
+      <input type="text" id="tempo-box" name="tempo-box" required minlength="5" maxlength="6" size="10">
+    </label>
+  </div>
+  <div id="phrases">
+    <table id="phraseTable">
+      <tr>
+        <td>
+          <button id="up8_1" class="octButton">8 va</button><br>
+          <button id="dn8_1" class="octButton">8 vb</button><br>
+        <td><img src="images/Sco1.png" id="sco1" draggable="false"></td>
+      </tr>
+      <tr>
+        <td>
 
-    
-    <script src="script.js"></script>
-    <script src = "voices.js"></script>
-    <script src = "InCphrases.js"></script>
-  
+          <button id="up8_2" class="octButton">8 va</button><br>
+          <button id="dn8_2" class="octButton">8 vb</button><br>
+        <td><img src="images/Sco2.png" id="sco2" draggable="false">
+      </tr>
+      <tr>
+        <td>
+          <button id="up8_3" class="octButton">8 va</button><br>
+          <button id="dn8_3" class="octButton">8 vb</button><br>
+        <td><img src="images/Sco3.png" id="sco3" draggable="false">
+      </tr>
+      <tr>
+        <td>
+          <button id="up8_4" class="octButton">8 va</button><br>
+          <button id="dn8_4" class="octButton">8 vb</button><br>
+        <td><img src="images/Sco4.png" id="sco4" draggable="false">
+      </tr>
+      <tr>
+        <td>
+          <button id="up8_5" class="octButton">8 va</button><br>
+          <button id="dn8_5" class="octButton">8 vb</button><br>
+        <td><img src="images/Sco5.png" id="sco5" draggable="false">
+      </tr>
+      <tr>
+        <td>
+          <button id="up8_6" class="octButton">8 va</button><br>
+          <button id="dn8_6" class="octButton">8 vb</button><br>
+        <td><img src="images/Sco6.png" id="sco6" draggable="false">
+      </tr>
+      <tr>
+        <td>
+          <button id="up8_7" class="octButton">8 va</button><br>
+          <button id="dn8_7" class="octButton">8 vb</button><br>
+        <td><img src="images/Sco7.png" id="sco7" draggable="false">
+      </tr>
+      <tr>
+        <td>
+          <button id="up8_8" class="octButton">8 va</button><br>
+          <button id="dn8_8" class="octButton">8 vb</button><br>
+        <td><img src="images/Sco8.png" id="sco8" draggable="false">
+      </tr>
+      <tr>
+        <td>
+          <button id="up8_9" class="octButton">8 va</button><br>
+          <button id="dn8_9" class="octButton">8 vb</button><br>
+        <td><img src="images/Sco9.png" id="sco9" draggable="false">
+      </tr>
+      <tr>
+        <td>
+          <button id="up8_10" class="octButton">8 va</button><br>
+          <button id="dn8_10" class="octButton">8 vb</button><br>
+        <td><img src="images/Sco10.png" id="sco10" draggable="false">
+      </tr>
+      <tr>
+        <td>
+          <button id="up8_11" class="octButton">8 va</button><br>
+          <button id="dn8_11" class="octButton">8 vb</button><br>
+        <td><img src="images/Sco11.png" id="sco11" draggable="false">
+      </tr>
+      <tr>
+        <td>
+          <button id="up8_12" class="octButton">8 va</button><br>
+          <button id="dn8_12" class="octButton">8 vb</button><br>
+        <td><img src="images/Sco12.png" id="sco12" draggable="false">
+      </tr>
+    </table>
+  </div>
 
-  </body>
+
+  <script src="script.js"></script>
+  <script src="voices.js"></script>
+  <script src="InCphrases.js"></script>
+
+
+</body>
+
 </html>

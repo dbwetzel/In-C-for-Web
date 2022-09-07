@@ -2,3 +2,26 @@
   height: 40px;
   width: 50px
 }
+
+.metro-button{
+  height: 40px;
+}
+.menu{
+  border: 4px solid;
+  background-color: #4caf50; /* Green */
+  border-radius: 8px;
+  width: 100%;
+  height: 40px;
+  padding: 5px 5px;
+  color: white;
+}
+
+.form-control {
+  font-family: system-ui, sans-serif;
+  font-size: 2rem;
+  font-weight: bold;
+  line-height: 1.1;
+  display: grid;
+  grid-template-columns: 1em auto;
+  gap: 0.5em;
+}
