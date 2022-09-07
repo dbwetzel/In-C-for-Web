@@ -1,22 +1,24 @@
-document.querySelector('button') ?.addEventListener('click', async () => {
+document.querySelector('button')?.addEventListener('click', async () => {
   await Tone.start()
   console.log('audio is ready')
 })
- 
-document.getElementById("about") ?.addEventListener('click', () => {
+
+document.getElementById("about")?.addEventListener('click', () => {
   let x = document.getElementById('aboutInC');
   if (x.style.display === "none") {
     x.style.display = "block";
   } else {
     x.style.display = "none";
-  }  });
-document.getElementById("metronome") ?.addEventListener('click', () => {
+  }
+});
+document.getElementById("metronome")?.addEventListener('click', () => {
   let x = document.getElementById('metro');
   if (x.style.display === "none") {
     x.style.display = "block";
   } else {
     x.style.display = "none";
-  }  });
+  }
+});
 
 var parts = new Array(53);
 
@@ -64,7 +66,7 @@ let syncStatus = document.querySelector("input[name='sync']"); syncStatus.addEve
   }
   console.log(Tone.Transport.bpm.value)
 })
-document.querySelector("button[name='mute_metro']") ?.addEventListener('click', () => {
+document.querySelector("button[name='mute_metro']")?.addEventListener('click', () => {
   synthA.volume.value = -96;
   synthB.volume.value = -96;
   synthC.volume.value = -96;
@@ -72,7 +74,7 @@ document.querySelector("button[name='mute_metro']") ?.addEventListener('click', 
   console.log('metro muted')
 })
 
-document.querySelector("button[name='unmute_metro']") ?.addEventListener('click', () => {
+document.querySelector("button[name='unmute_metro']")?.addEventListener('click', () => {
   synthA.volume.value = 0;
   synthB.volume.value = 0;
   synthC.volume.value = 0;
@@ -80,44 +82,91 @@ document.querySelector("button[name='unmute_metro']") ?.addEventListener('click'
   console.log('metro unmuted')
 })
 
-document.querySelector("button[name='metro']") ?.addEventListener('click', () => {
+document.querySelector("button[name='metro']")?.addEventListener('click', () => {
   Tone.Transport.bpm.value = 138
   Tone.Transport.start()
   console.log('starting transport')
 })
 
-document.querySelector("button[name='stop']") ?.addEventListener('click', () => {
+document.querySelector("button[name='stop']")?.addEventListener('click', () => {
   Tone.Transport.stop()
   console.log('stopping transport')
 })
 
+for (let i = 0; i < 53; i++) {
+  // Find a <table> element with id="myTable":
+  var table = document.getElementById("phraseTable");
+
+  // Create an empty <tr> element and add it to the 1st position of the table:
+  var row = table.insertRow(i);
+
+  // Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
+  let cell1 = row.insertCell(0);
+  let cell2 = row.insertCell(1);
+
+  let btn = document.createElement('input');
+  btn.type = "button";
+  btn.id = "up8_" + (i + 1);
+  btn.className = "octButton";
+  btn.value = "8va";
+  cell1.appendChild(btn);
+  btn = document.createElement('input');
+  btn.type = "button";
+  btn.id = "dn8_" + (i + 1);
+  btn.className = "octButton";
+  btn.value = "8vb";
+  cell1.appendChild(btn);
+  // Add score images to cell2:
+  let img = document.createElement('img');
+  img.src = "/images/Sco" + (i + 1) + ".png";
+  img.id = "sco" + (i + 1);
+  img.draggable = false;
+  cell2.appendChild(img);
+}
+/** 
+var btn = document.createElement('input');
+btn.type = "button";
+btn.id = "up8_" + (i + 1);
+btn.className = "octButton";
+btn.value = 8va;
+td.appendChild(btn);
+      <tr>
+        <td>
+          <button id="up8_12" class="octButton">8 va</button><br>
+          <button id="dn8_12" class="octButton">8 vb</button><br>
+        <td><img src="images/Sco12.png" id="sco12" draggable="false">
+      </tr>
+
+**/
+
+
 // Attach actions to buttons
 for (let i = 0; i < 53; i++) {
-  document.getElementById("sco" + (i + 1)) ?.addEventListener('mousedown', () => {
+  document.getElementById("sco" + (i + 1))?.addEventListener('mousedown', () => {
     if (Tone.Transport.state = "started") {
       parts[i] = sequence(i);
-      if(parts[i]) parts[i].loop = true;
+      if (parts[i]) parts[i].loop = true;
     } else console.log("start metronome first");
   });
-  document.getElementById("sco" + (i + 1)) ?.addEventListener('mouseup', () => {
+  document.getElementById("sco" + (i + 1))?.addEventListener('mouseup', () => {
     if (parts[i]) parts[i].loop = 1;
   });
-  document.getElementById("sco" + (i + 1)) ?.addEventListener('mouseleave', () => {
+  document.getElementById("sco" + (i + 1))?.addEventListener('mouseleave', () => {
     if (parts[i]) parts[i].loop = 1;
   });
 
-  document.getElementById("up8_" + (i + 1)) ?.addEventListener('click', () => {
+  document.getElementById("up8_" + (i + 1))?.addEventListener('click', () => {
     if (InC_phrases[i].octave < 3) InC_phrases[i].octave++;
   });
 
-  document.getElementById("dn8_" + (i + 1)) ?.addEventListener('click', () => {
+  document.getElementById("dn8_" + (i + 1))?.addEventListener('click', () => {
     if (InC_phrases[i].octave > -3) InC_phrases[i].octave--;
   });
 }
 
 function sequence(i) {
 
-  if(Tone.Transport.state == "stopped") {
+  if (Tone.Transport.state == "stopped") {
     console.log("start transport first");
     return;
   }
