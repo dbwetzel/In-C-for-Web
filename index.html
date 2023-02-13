@@ -31,28 +31,61 @@
       phrases.
     </p>
     <p>A complete performance of 'In C' takes anywhere from 45 minutes to an hour and a half.</p>
+    <button id="credits" class='menu'>CREDITS</button>
+    <div id="InC-credits" style="display: none;">
+      "In C" sequences prepared by students from COMP/MUSC 122, Spring 2022, Loyola University Chicago
+    </div>
   </div>
-  <button id="metronome" class='menu'>Metronome</button>
-  <div id="metro" style="display: none; background-color: #EEEEEE;">
-    <button name="tone" class='metro-button'>Start Audio</button>
-    <button name="metro" class='metro-button'>Start metro</button>
-    <button name="stop" class='metro-button'>Stop metro</button><br></br>
-    <button name="mute_metro" class='metro-button'>Mute Metro</button>
-    <button name="unmute_metro" class='metro-button'>Unmute Metro</button><br>
-    <p></p>
-    <label class="form-control">
-      <input type="checkbox" id="sync" name="sync" name="checkbox" />
-      Sync
-    </label>
-    <label> Tempo:
-      <input type="text" id="tempo-box" name="tempo-box" required minlength="5" maxlength="6" size="10">
-    </label>
+  <div class="utilities">
+    <button id="metronome" class='menu'>Metronome</button>
+    <div id="metro" style="display: none; background-color: #EEEEEE;">
+      <button name="tone" class='metro-button'>Start Audio</button>
+      <button name="metro" class='metro-button'>Start metro</button>
+      <button name="stop" class='metro-button'>Stop metro</button><br></br>
+      <button name="mute_metro" class='metro-button'>Mute Metro</button>
+      <button name="unmute_metro" class='metro-button'>Unmute Metro</button><br>
+      <p></p>
+      <label class="form-control">
+        <input class="box" type="checkbox" id="sync" name="sync" name="checkbox" />
+        Sync
+      </label>
+      <label class="form-control"> Tempo:
+        <input type="text" id="tempo-box" name="tempo-box" required minlength="5" maxlength="6" size="10">
+      </label>
+    </div>
+    <button id="sounds" class='menu'>Sounds</button>
+    <div id="sound-controls" style="display: none; background-color: #EEEEEE;">
+      <label class="form-control" for="sound-select">Choose a sound: (coming soon ...)</label>
+
+      <select class=dropdown name="sounds" id="sound-select">
+        <option value="default">Default</option>
+        <option value="square_lead">Square Lead</option>
+        <option value="AM_Synth">AM Synth</option>
+        <option value="FM_Synth">FM Synth</option>
+        <option value="Noisy">Noisy</option>
+        <option value="Piano">Piano</option>
+      </select>
+    </div>
   </div>
+  <div id="testLoop" class="loopDiv" style="display: none;">
+    <form>
+      <label for="checkbox2" class="loopLabel">
+        <input type="checkbox" id="checkbox2" class="loopInput">
+        <span class=loopSpan id="svgTemplate">
+          <svg xmlns="http://www.w3.org/2000/svg" class="loopsvg" fill=none viewBox="0 0 24 24" stroke-width="2"
+            stroke="currentColor">
+            <path d="M8.81,2.05l1.55,1.21L8.81,4.33V2.05z M9.9,3.27H3c-1.1,0-2,0.9-2,2v4.8c0,1.1,0.9,2,2,2h13.81c1.1,0,2-0.9,2-2
+	v-4.8c0-1.1-0.9-2-2-2h-3.72" />
+          </svg>
+        </span>
+      </label>
+    </form>
+  </div>
+
   <div id="phrases">
     <table id="phraseTable">
     </table>
   </div>
-
 
   <script src="script.js"></script>
   <script src="voices.js"></script>
