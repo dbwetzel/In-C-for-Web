@@ -85,12 +85,37 @@ let syncStatus = document.querySelector("input[name='sync']"); syncStatus.addEve
   }
   console.log(Tone.Transport.bpm.value)
 })
-document.querySelector("button[name='mute_metro']")?.addEventListener('click', () => {
-  synthA.volume.value = -96;
-  synthB.volume.value = -96;
-  synthC.volume.value = -96;
-  synthD.volume.value = -96;
-  console.log('metro muted')
+let metroMute = "on"; // default is muted
+synthA.volume.value = -96;
+synthB.volume.value = -96;
+synthC.volume.value = -96;
+synthD.volume.value = -96;
+console.log('metro muted')
+
+let metroButton = document.getElementById("pulse");
+metroButton.addEventListener('click', () => {
+  switch (metroMute){
+    case "on" : // unmute if "on"
+      synthA.volume.value = 0;
+      synthB.volume.value = 0;
+      synthC.volume.value = 0;
+      synthD.volume.value = 0;
+      console.log('metro unmuted');
+      metroMute = "off";
+      metroButton.style.background = "#ee0000";
+      metroButton.innerHTML = "Mute Metronome Pulse"
+      break;
+    case "off" : // kill if mute is off
+      synthA.volume.value = -96;
+      synthB.volume.value = -96;
+      synthC.volume.value = -96;
+      synthD.volume.value = -96;
+      console.log('metro muted');
+      metroMute = "on"; // flip
+      metroButton.style.background = "#4caf50";
+      metroButton.innerHTML = "Play Metronome Pulse"
+          
+  }
 })
 
 document.querySelector("button[name='unmute_metro']")?.addEventListener('click', () => {
@@ -101,15 +126,26 @@ document.querySelector("button[name='unmute_metro']")?.addEventListener('click',
   console.log('metro unmuted')
 })
 
-document.querySelector("button[name='metro']")?.addEventListener('click', () => {
-  Tone.Transport.bpm.value = 138
-  Tone.Transport.start()
-  console.log('starting transport')
-})
-
-document.querySelector("button[name='stop']")?.addEventListener('click', () => {
-  Tone.Transport.stop()
-  console.log('stopping transport')
+let tButton = document.getElementById("transport");
+tButton.addEventListener('click', () => {
+  switch(Tone.Transport.state){
+    case "stopped" : 
+      Tone.Transport.bpm.value = 138;
+      Tone.Transport.start();
+      console.log('starting transport');
+      tButton.style.background='#ee0000';
+      tButton.innerHTML = "Stop Transport";
+      break;
+    case "started" :
+      Tone.Transport.stop();
+      console.log('stopping transport');
+      tButton.style.background='#4caf50';
+      tButton.innerHTML = "Start Transport";
+      break;
+    default :
+      Tone.Transport.start();
+  }
+  
 })
 
 for (let i = 0; i < 53; i++) {

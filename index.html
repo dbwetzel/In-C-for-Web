@@ -38,12 +38,11 @@
   </div>
   <div class="utilities">
     <button id="metronome" class='menu'>Metronome</button>
-    <div id="metro" style="display: none; background-color: #EEEEEE;">
-      <button name="tone" class='metro-button'>Start Audio</button>
-      <button name="metro" class='metro-button'>Start metro</button>
-      <button name="stop" class='metro-button'>Stop metro</button><br></br>
-      <button name="mute_metro" class='metro-button'>Mute Metro</button>
-      <button name="unmute_metro" class='metro-button'>Unmute Metro</button><br>
+    <div id="metro" style="display: none; background-color: #EEEEEE;" class="metro">
+      <button name="tone" class='metro-button' style="display: none;">Start Audio</button>
+      <button name="transport" id="transport" class='metro-button'>Start Transport</button>
+      <button name="pulse" id="pulse" class='metro-button'>Play Metronome Pulse</button>
+      <button name="unmute_metro" class='metro-button' style="display: none;">Unmute Metro</button><br>
       <p></p>
       <label class="form-control">
         <input class="box" type="checkbox" id="sync" name="sync" name="checkbox" />
