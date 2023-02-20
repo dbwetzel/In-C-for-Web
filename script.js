@@ -14,6 +14,15 @@ document.getElementById("about")?.addEventListener('click', () => {
     x.style.display = "none";
   }
 });
+document.getElementById("howTo")?.addEventListener('click', () => {
+  let x = document.getElementById('InC-howTo');
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+});
+
 document.getElementById("credits")?.addEventListener('click', () => {
   let x = document.getElementById('InC-credits');
   if (x.style.display === "none") {
@@ -38,6 +47,15 @@ document.getElementById("sounds")?.addEventListener('click', () => {
     x.style.display = "none";
   }
 });
+document.getElementById("unloop")?.addEventListener('click', () => {
+  for(let i = 0; i < 53; i++){
+    document.getElementById("loop_" + (i + 1)).checked = false;
+    if(parts[i]){
+      parts[i].loop = 1;
+    }
+  }
+});
+
 
 var parts = new Array(53);
 
@@ -75,16 +93,8 @@ const loopD = new Tone.Loop(time => {
 }, "8n").start(0);
 // the loops start when the Transport is started
 //Tone.Transport.start()
-let syncStatus = document.querySelector("input[name='sync']"); syncStatus.addEventListener('change', () => {
-  if (syncStatus.checked) {
-    Tone.Transport.bpm.value = bpm * 1.05;
-    document.getElementById("tempo-box").value = Tone.Transport.bpm.value;
-  } else {
-    Tone.Transport.bpm.value = bpm;
-    document.getElementById("tempo-box").value = Tone.Transport.bpm.value;
-  }
-  console.log(Tone.Transport.bpm.value)
-})
+
+//Metronome
 let metroMute = "on"; // default is muted
 synthA.volume.value = -96;
 synthB.volume.value = -96;
@@ -102,7 +112,7 @@ metroButton.addEventListener('click', () => {
       synthD.volume.value = 0;
       console.log('metro unmuted');
       metroMute = "off";
-      metroButton.style.background = "#ee0000";
+      metroButton.style.background = "#4caf50";
       metroButton.innerHTML = "Mute Metronome Pulse"
       break;
     case "off" : // kill if mute is off
@@ -112,19 +122,12 @@ metroButton.addEventListener('click', () => {
       synthD.volume.value = -96;
       console.log('metro muted');
       metroMute = "on"; // flip
-      metroButton.style.background = "#4caf50";
+      metroButton.style.background = "#a8a8a8";
       metroButton.innerHTML = "Play Metronome Pulse"
           
   }
 })
 
-document.querySelector("button[name='unmute_metro']")?.addEventListener('click', () => {
-  synthA.volume.value = 0;
-  synthB.volume.value = 0;
-  synthC.volume.value = 0;
-  synthD.volume.value = 0;
-  console.log('metro unmuted')
-})
 
 let tButton = document.getElementById("transport");
 tButton.addEventListener('click', () => {
@@ -133,13 +136,13 @@ tButton.addEventListener('click', () => {
       Tone.Transport.bpm.value = 138;
       Tone.Transport.start();
       console.log('starting transport');
-      tButton.style.background='#ee0000';
+      tButton.style.background='#4caf50';
       tButton.innerHTML = "Stop Transport";
       break;
     case "started" :
       Tone.Transport.stop();
       console.log('stopping transport');
-      tButton.style.background='#4caf50';
+      tButton.style.background='#a8a8a8';
       tButton.innerHTML = "Start Transport";
       break;
     default :
@@ -147,6 +150,39 @@ tButton.addEventListener('click', () => {
   }
   
 })
+
+let sync = "off";
+let syncButton = document.getElementById("syncButton");
+syncButton.addEventListener('click', () => {
+  if (sync == "off"){
+    sync = "on"; // turn on sync
+    Tone.Transport.bpm.value = bpm * 1.05;
+    document.getElementById("tempo-box").value = Tone.Transport.bpm.value;
+    syncButton.innerHTML = "Synchronizing (tap when in sync)";
+    syncButton.style.background = "#ffa033";
+  } else {
+    sync = "off";
+    Tone.Transport.bpm.value = bpm;
+    document.getElementById("tempo-box").value = Tone.Transport.bpm.value;
+    syncButton.innerHTML = "Synchronize Metronomes";
+    syncButton.style.background = "#a8a8a8";
+  }
+  
+})
+/*
+let syncStatus = document.querySelector("input[name='sync']"); syncStatus.addEventListener('change', () => {
+  if (syncStatus.checked) {
+    Tone.Transport.bpm.value = bpm * 1.05;
+    document.getElementById("tempo-box").value = Tone.Transport.bpm.value;
+  } else {
+    Tone.Transport.bpm.value = bpm;
+    document.getElementById("tempo-box").value = Tone.Transport.bpm.value;
+  }
+  console.log(Tone.Transport.bpm.value)
+})
+*/
+
+
 
 for (let i = 0; i < 53; i++) {
   // Find a <table> element with id="myTable":

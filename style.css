@@ -1,6 +1,6 @@
 .octButton{
   height: 40px;
-  width: 50px
+  width: 50px;
 }
 
 .box{
@@ -73,7 +73,7 @@
 .metro-button{
   border: 4px solid;
   height: 40px;
-  background-color: #4caf50;
+  background-color: #a8a8a8;
   border-radius: 8px;
   width: 80%;
   padding: 5px 5px;
@@ -103,6 +103,7 @@
   display: flex;
   grid-template-columns: 1em auto;
   gap: 0.5em;
+  text-align: center;
 }
 
 .utilities {
