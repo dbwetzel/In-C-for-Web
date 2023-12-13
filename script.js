@@ -48,9 +48,9 @@ document.getElementById("sounds")?.addEventListener('click', () => {
   }
 });
 document.getElementById("unloop")?.addEventListener('click', () => {
-  for(let i = 0; i < 53; i++){
+  for (let i = 0; i < 53; i++) {
     document.getElementById("loop_" + (i + 1)).checked = false;
-    if(parts[i]){
+    if (parts[i]) {
       parts[i].loop = 1;
     }
   }
@@ -71,25 +71,34 @@ for (let i = 0; i < synth.length; i++) {
 // create two monophonic synths
 const synthA = new Tone.FMSynth().toDestination();
 const synthB = new Tone.AMSynth().toDestination();
-const synthC = new Tone.AMSynth().toDestination();
+//const synthC = new Tone.AMSynth().toDestination();
 const synthD = new Tone.AMSynth().toDestination();
+const synthC = new Tone.Sampler({
+  "urls" : {
+    "C2" : "Kick.wav",
+    "C4" : "Snare.wav",
+    "C3" : "Hi_Hat-Closed.wav"
+    
+  },
+  "baseUrl" : "samples/"
+}).toDestination();
 
 //play a note every quarter-note
 const loopA = new Tone.Loop(time => {
-  synthA.triggerAttackRelease("C5", "16n", time);
+//  synthA.triggerAttackRelease("C5", "16n", time);
 }, "4n").start(0);
 //play another note every off quarter-note, by starting it "8n"
 const loopB = new Tone.Loop(time => {
-  synthB.triggerAttackRelease("C4", "16n", time);
+//  synthB.triggerAttackRelease("C4", "16n", time);
 }, "4n").start(0);
 
 const loopC = new Tone.Loop(time => {
-  synthC.triggerAttackRelease("C2", "8n", time);
+  synthC.triggerAttackRelease("C4", "8n", time);
   console.log(Tone.Transport.position);
 }, "1m").start(0);
 
 const loopD = new Tone.Loop(time => {
-  synthD.triggerAttackRelease("C6", "16n", time);
+//  synthD.triggerAttackRelease("C6", "16n", time);
 }, "8n").start(0);
 // the loops start when the Transport is started
 //Tone.Transport.start()
@@ -104,8 +113,8 @@ console.log('metro muted')
 
 let metroButton = document.getElementById("pulse");
 metroButton.addEventListener('click', () => {
-  switch (metroMute){
-    case "on" : // unmute if "on"
+  switch (metroMute) {
+    case "on": // unmute if "on"
       synthA.volume.value = 0;
       synthB.volume.value = 0;
       synthC.volume.value = 0;
@@ -115,7 +124,7 @@ metroButton.addEventListener('click', () => {
       metroButton.style.background = "#4caf50";
       metroButton.innerHTML = "Mute Metronome Pulse"
       break;
-    case "off" : // kill if mute is off
+    case "off": // kill if mute is off
       synthA.volume.value = -96;
       synthB.volume.value = -96;
       synthC.volume.value = -96;
@@ -124,37 +133,38 @@ metroButton.addEventListener('click', () => {
       metroMute = "on"; // flip
       metroButton.style.background = "#a8a8a8";
       metroButton.innerHTML = "Play Metronome Pulse"
-          
+
   }
 })
 
 
 let tButton = document.getElementById("transport");
 tButton.addEventListener('click', () => {
-  switch(Tone.Transport.state){
-    case "stopped" : 
+  switch (Tone.Transport.state) {
+    case "stopped":
       Tone.Transport.bpm.value = 138;
       Tone.Transport.start();
       console.log('starting transport');
-      tButton.style.background='#4caf50';
+      tButton.style.background = '#4caf50';
       tButton.innerHTML = "Stop Transport";
       break;
-    case "started" :
+    case "started":
       Tone.Transport.stop();
       console.log('stopping transport');
-      tButton.style.background='#a8a8a8';
+      tButton.style.background = '#a8a8a8';
       tButton.innerHTML = "Start Transport";
       break;
-    default :
+    default:
       Tone.Transport.start();
   }
-  
+
 })
 
+/** Sync button */
 let sync = "off";
 let syncButton = document.getElementById("syncButton");
 syncButton.addEventListener('click', () => {
-  if (sync == "off"){
+  if (sync == "off") {
     sync = "on"; // turn on sync
     Tone.Transport.bpm.value = bpm * 1.05;
     document.getElementById("tempo-box").value = Tone.Transport.bpm.value;
@@ -167,11 +177,30 @@ syncButton.addEventListener('click', () => {
     syncButton.innerHTML = "Synchronize Metronomes";
     syncButton.style.background = "#a8a8a8";
   }
-  
+
 });
 
+/* range.addEventListener('input', function() {
+  square.style.outlineOffset = this.value + 'px';
+}, false);
+*/
+/** Sync adjustment slider */
+let tempoMod = document.getElementById("tempo-mod");
+//console.log(tempoMod);
+tempoMod.addEventListener('input', function() {
+  //console.log(this.value * 0.01 + 1);
+  Tone.Transport.bpm.value = bpm * (this.value * 0.01 + 1);
+  document.getElementById("tempo-box").value = Tone.Transport.bpm.value;
+}, false);
+tempoMod.addEventListener('change', function() {
+  this.value = 0;
+  Tone.Transport.bpm.value = bpm;
+  document.getElementById("tempo-box").value = Tone.Transport.bpm.value;
+
+})
+
 let tapSync = document.getElementById("tapSync");
-tapSync.addEventListener('click', ()=>{
+tapSync.addEventListener('click', () => {
   console.log("tapSync");
   //Tone.Transport.bpm.value = bpm;
   //Tone.Transport.stop();
@@ -192,7 +221,7 @@ let syncStatus = document.querySelector("input[name='sync']"); syncStatus.addEve
 */
 
 
-
+/** Set up 53 phrases for In C */
 for (let i = 0; i < 53; i++) {
   // Find a <table> element with id="myTable":
   var table = document.getElementById("phraseTable");
@@ -267,15 +296,15 @@ for (let i = 0; i < 53; i++) {
   loop.addEventListener('change', function() {
     if (this.checked) {
       console.log("looping #" + (i + 1));
-      if(parts[i]) parts[i].loop = true;
+      if (parts[i]) parts[i].loop = true;
     } else {
       console.log("stopping #" + (i + 1));
-      if(parts[i]) parts[i].loop = 1;
+      if (parts[i]) parts[i].loop = 1;
     }
   });
   document.getElementById("sco" + (i + 1))?.addEventListener('mousedown', () => {
     if (Tone.Transport.state = "started") {
-      if(parts[i]){
+      if (parts[i]) {
         //dispose of the part that's already playing
         parts[i].dispose();
       }

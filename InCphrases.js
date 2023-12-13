@@ -1,15 +1,17 @@
-const InC_phrases = [
+const InC_phrases = 
+  [
   {  /** #1 */
     num: 1,
     duration: "0:3:0",
     octave: 0,
     image: "sco1.png",
-    sequence: [{ time: 0, pitch: "C4", dur: "32n" },
-    { time: "0:0:0.3", pitch: "e4", dur: "4n" },
-    { time: "0:1:0", pitch: "c4", dur: "32n" },
-    { time: "0:1:0.3", pitch: "e4", dur: "4n" },
-    { time: "0:2:0", pitch: "C4", dur: "32n" },
-    { time: "0:2:0.3", pitch: "e4", dur: "4n" }
+    sequence: [
+      { time: 0, pitch: "C4", dur: "32n" },
+      { time: "0:0:0.3", pitch: "e4", dur: "4n" },
+      { time: "0:1:0", pitch: "c4", dur: "32n" },
+      { time: "0:1:0.3", pitch: "e4", dur: "4n" },
+      { time: "0:2:0", pitch: "C4", dur: "32n" },
+      { time: "0:2:0.3", pitch: "e4", dur: "4n" }
     ]
   },
   { /** #2 */

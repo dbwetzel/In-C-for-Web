@@ -4,8 +4,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>replit</title>
+  <title>Terry Riley's In C with Tone.js</title>
   <link href="style.css" rel="stylesheet" type="text/css" />
+  <link href="slider.css" rel="stylesheet" type="text/css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js">
 
   </script>
@@ -34,31 +35,52 @@
     <button id="howTo" class="menu">How to Play "In C"</button>
     <div id="InC-howTo" style="display: none;">
       <p>
-        This is a "play-along" version of Terry Rileys "In C" (1964) designed for inclusion. If you have a device that can play sound through a web browser, you can participate, regardless of musical background or ability.
+        This is a "play-along" version of Terry Rileys "In C" (1964) designed for inclusion. If you have a device that
+        can play sound through a web browser, you can participate, regardless of musical background or ability.
       </p>
       <p>
-        To get started, open the "Metronome" tab (below) and tap on "Start Transport." Someone in the group should designate their device as the "conductor" and tap "Play Metronome Pulse." You should hear a steady pulse on the note 'C' (in multiple octaves).
+        To get started, open the "Metronome" tab (below) and tap on "Start Transport." Someone in the group should
+        designate their device as the "conductor" and tap "Play Metronome Pulse." You should hear a steady pulse on the
+        note 'C' (in multiple octaves).
       </p>
-      <p>When another "player" member of the group starts their Transport and Metronome, you might hear that the pulse is out of sync with the "conductor" pulse. To synchronize the metronomes between a player and the conductor, the player should tap on the "Synchronize Metronomes" button (it should turn orange). This will cause the player's metronome to run 5% faster. 
-      </p> 
-      <p>Listen carefully for when the player's metronome catches up with the conductor's metronome. At that point, the two metronomes should be in sync. Tap the sync button one more time to return to the standard tempo (138 bpm).  
+      <p>When another "player" member of the group starts their Transport and Metronome, you might hear that the pulse
+        is out of sync with the "conductor" pulse. To synchronize the metronomes between a player and the conductor, the
+        player should tap on the "Synchronize Metronomes" button (it should turn orange). This will cause the player's
+        metronome to run 5% faster.
       </p>
-      <p>Leave the "Transport" running so you can play the rest of the piece. You may turn off the Metronome pulse if you like (recommended except for the "conductor"). Close the metronome tab.
+      <p>Listen carefully for when the player's metronome catches up with the conductor's metronome. At that point, the
+        two metronomes should be in sync. Tap the sync button one more time to return to the standard tempo (138 bpm).
       </p>
-      <p>At the beginning of a performance (reading, realization, ...) of In C, all players begin by playing phrase #1. To play, simply tap on the music notation image for a given excerpt. To play it an octave higher, tap the "8va" button. To play an octave lower, tap the "8vb" button. To loop an excerpt, tap the "loop" icon below the octave buttons. Tap it again to stop looping that excerpt.
+      <p>Leave the "Transport" running so you can play the rest of the piece. You may turn off the Metronome pulse if
+        you like (recommended except for the "conductor"). Close the metronome tab.
       </p>
-      <p>Everyone begins on phrase #1, playing single passes, or looping (or laying out) as the spirit moves them. When you feel it's right, move on to phrase 2. Listen for the others, and don't get too far ahead. </p>
-      <p>One of the rules of "In C" is that all members of the group should stay within 3-4 phrases of each other. See if you can create a "dialog" with someone near you by trading phrases back and forth (maybe in different octaves). Don't forget to turn off loops for phrases you have left behind. Gradually move your way through all 53 phrases with the group, but make your own decisions about whether to play or not, loop or not, raise or lower the octave, and preceisely when to move on the the next phrase.
+      <p>At the beginning of a performance (reading, realization, ...) of In C, all players begin by playing phrase #1.
+        To play, simply tap on the music notation image for a given excerpt. To play it an octave higher, tap the "8va"
+        button. To play an octave lower, tap the "8vb" button. To loop an excerpt, tap the "loop" icon below the octave
+        buttons. Tap it again to stop looping that excerpt.
       </p>
-      <p>Nothing is stopping you from moving backwards, but the idea is to move forwards only, and to concentrate on one phrase at a time per player (even though this app allows you to run multiple simultaneous loops). The piece is done when all players have made it to the end, and everyone drops out one by one. Look for a cue from the "conductor" to know when it's really finished. Then give each other a high-five!</p>
+      <p>Everyone begins on phrase #1, playing single passes, or looping (or laying out) as the spirit moves them. When
+        you feel it's right, move on to phrase 2. Listen for the others, and don't get too far ahead. </p>
+      <p>One of the rules of "In C" is that all members of the group should stay within 3-4 phrases of each other. See
+        if you can create a "dialog" with someone near you by trading phrases back and forth (maybe in different
+        octaves). Don't forget to turn off loops for phrases you have left behind. Gradually move your way through all
+        53 phrases with the group, but make your own decisions about whether to play or not, loop or not, raise or lower
+        the octave, and preceisely when to move on the the next phrase.
+      </p>
+      <p>Nothing is stopping you from moving backwards, but the idea is to move forwards only, and to concentrate on one
+        phrase at a time per player (even though this app allows you to run multiple simultaneous loops). The piece is
+        done when all players have made it to the end, and everyone drops out one by one. Look for a cue from the
+        "conductor" to know when it's really finished. Then give each other a high-five!</p>
     </div>
-  
+
     <button id="credits" class='menu'>CREDITS</button>
     <div id="InC-credits" style="display: none;">
       <p>"IN C with Tone.js" code by David B. Wetzel</p>
       <p>Original concept by Griffin Moe</p>
-      <p>"In C" v 1.0 prototype in Max (2016) by David B. Wetzel, Griffin Moe, and the students of COMP 122 in fall 2016</p>
-      <p>Thanks also to George Thiruvathukal for advice, testing, participation in early trials, and general moral and institutional support for this project</p>
+      <p>"In C" v 1.0 prototype in Max (2016) by David B. Wetzel, Griffin Moe, and the students of COMP 122 in fall 2016
+      </p>
+      <p>Thanks also to George Thiruvathukal for advice, testing, participation in early trials, and general moral and
+        institutional support for this project</p>
       <p>"In C" sequences prepared by students from COMP/MUSC 122, Spring 2022, Loyola University Chicago</p>
       <ul>
         <li>Atherly-Larsen, Maya
@@ -98,11 +120,15 @@
       <button name="tone" class='metro-button' style="display: none;">Start Audio</button>
       <button name="transport" id="transport" class='metro-button'>Start Transport</button>
       <button name="pulse" id="pulse" class='metro-button'>Play Metronome Pulse</button>
-      <button name="syncButton" id="syncButton" class="metro-button" style="width: 40%;">Synchronize Metronomes</button>    
-      <button name="tapSync" id="tapSync" class="metro-button" style="width: 40%;">Tap to Sync</button> <br>    
-        <label style="text-align: center;"> Tempo:
-        <input type="text" id="tempo-box" name="tempo-box" required minlength="5" maxlength="6" size="10">
-      </label>
+      <button name="syncButton" id="syncButton" class="metro-button" style="width: 40%;">Synchronize Metronomes</button>
+      <button name="tapSync" id="tapSync" class="metro-button" style="width: 40%;">Tap to Sync</button> <br>
+      <div id="temposlider" class="metro-button" style="margin:0 auto;">
+        <label> Tempo:
+          <input type="text" id="tempo-box" name="tempo-box" required minlength="5" maxlength="6" size="10">
+          <input type="range" id="tempo-mod" name="tempo-mod" min="-5.0" max="5.0" step="0.1" value="0"
+            style="width: 40%;">
+        </label>
+      </div>
     </div>
     <button id="sounds" class='menu'>Sounds</button>
     <div id="sound-controls" style="display: none; background-color: #EEEEEE;">
@@ -117,8 +143,8 @@
         <option value="Piano">Piano</option>
       </select>
     </div>
-    <button id="unloop" class='menu' onmousedown="this.style.background = '#ff0000'" onmouseup="this.style.background = '#4caf50'" onmouseleave="this.style.background = '#4caf50'"
-      >
+    <button id="unloop" class='menu' onmousedown="this.style.background = '#ff0000'"
+      onmouseup="this.style.background = '#4caf50'" onmouseleave="this.style.background = '#4caf50'">
       All Loops Off
     </button>
 
