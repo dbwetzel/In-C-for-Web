@@ -63,7 +63,7 @@ var bpm = 138; // set the global tempo
 document.getElementById("tempo-box").value = bpm;
 
 //create a synth and connect it to the main output (your speakers)
-const synth = new Array(16);
+var synth = new Array(16);
 for (let i = 0; i < synth.length; i++) {
   synth[i] = new Tone.Synth().toDestination();
 }
@@ -168,7 +168,16 @@ syncButton.addEventListener('click', () => {
     syncButton.style.background = "#a8a8a8";
   }
   
-})
+});
+
+let tapSync = document.getElementById("tapSync");
+tapSync.addEventListener('click', ()=>{
+  console.log("tapSync");
+  //Tone.Transport.bpm.value = bpm;
+  //Tone.Transport.stop();
+  //Tone.Transport.start();
+  Tone.Transport.position = 0;
+});
 /*
 let syncStatus = document.querySelector("input[name='sync']"); syncStatus.addEventListener('change', () => {
   if (syncStatus.checked) {

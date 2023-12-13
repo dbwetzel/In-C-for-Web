@@ -1,6 +1,21 @@
-var inC_Synths = [];
+var inC_Synths = ["AM Synth", "FM Synth", "Tone.Synth"];
 
-const synth1 = new Tone.Synth().toDestination();
+var polySynth = new Tone.PolySynth(Tone.Synth).toDestination(); // polyphonic container synth
+
+function progChange(prog){
+  switch(prog){
+    case "AM Synth":
+      polySynth = new Tone.PolySynth(Tone.AMSynth).toDestination();
+      break;
+    case "FM Synth":
+      polySynth = new Tone.PolySynth(Tone.FMSynth).toDestination();
+      break;
+    default:
+      polySynth = new Tone.PolySynth(Tone.Synth).toDestination();
+  }
+}
+
+const synth1 = new Tone.PolySynth(Tone.Synth).toDestination();
 let synth1_settings = {
 	"volume": 0,
 	"detune": 0,
@@ -25,7 +40,7 @@ let synth1_settings = {
 }
 synth1.set(synth1_settings);
 
-const synth2 = new Tone.AMSynth().toDestination();
+const synth2 = new Tone.PolySynth(Tone.AMSynth).toDestination();
 let synth2_settings = {
 	"volume": 0,
 	"detune": 0,
